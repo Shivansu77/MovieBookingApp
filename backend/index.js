@@ -17,13 +17,15 @@ app.get('/home', (req, res) => {
     res.json({ message: 'Welcome to the Home Page' });
 });
 
-app.listen(process.env.PORT || 8000, async() => {
+app.listen(process.env.PORT || 8000, async () => {
+  const PORT = process.env.PORT || 8000;
 
-    console.log(`Server is running at http://localhost:${process.env.PORT || 8000}`);
-    mongoose.connect(process.env.DB_URL).then(() => {
-        console.log('Connected to the database successfully');
-    }).catch((err) => {
-        console.log('Failed to connect to the database', err);
-    });
+  console.log(`Server is running at http://localhost:${PORT}`);
 
+  try {
+    await mongoose.connect(process.env.DB_URL);
+    console.log("Connected to the database successfully");
+  } catch (err) {
+    console.error("Failed to connect to the database", err);
+  }
 });
