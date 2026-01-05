@@ -20,10 +20,22 @@ const updateMovieById = async (id, payload) => {
     return Movie.findByIdAndUpdate(id, payload, { new: true, runValidators: true });
 };
 
+const fetchMovies = async (filter) => {
+    const query = {};
+    if (filter.name) {
+        query.name = filter.name;
+    }
+    if (filter.language) {
+        query.language = filter.language;
+    }
+    return Movie.find(query);
+};
+
 module.exports = {
     createMovie,
     getMovieById,
     getAllMovies,
     deleteMovieById,
     updateMovieById,
+    fetchMovies,
 };

@@ -26,6 +26,16 @@ const getMovie = async (req, res) => {
     }
 };
 
+const getMovies = async (req, res) => {
+    try {
+        const movies = await movieService.fetchMovies(req.query || {});
+        return res.status(200).json(movies);
+    } catch (err) {
+        console.error("Error fetching movies:", err);
+        return res.status(500).json({ error: "Failed to fetch movies", details: err.message });
+    }
+};
+
 const deleteMovie = async (req, res) => {
     try {
         const deleted = await movieService.deleteMovieById(req.params.id);
@@ -57,4 +67,5 @@ module.exports = {
     getMovie,
     deleteMovie,
     updateMovie,
+    getMovies,
 };

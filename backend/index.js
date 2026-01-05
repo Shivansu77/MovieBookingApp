@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const env = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const routes = require('./routes/movieRoutes.js');
+const movieRoutes = require('./routes/movieRoutes.js');
+const theatreRoutes = require('./routes/theatreRoutes.js');
 
 env.config();
 
@@ -13,7 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-routes(app);
+movieRoutes(app);
+theatreRoutes(app);
 
 app.get('/home', (req, res) => {
     res.json({ message: 'Welcome to the Home Page' });
