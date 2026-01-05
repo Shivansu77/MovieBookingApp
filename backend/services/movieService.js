@@ -16,9 +16,14 @@ const deleteMovieById = async (id) => {
     return Movie.findByIdAndDelete(id);
 };
 
+const updateMovieById = async (id, payload) => {
+    return Movie.findByIdAndUpdate(id, payload, { new: true, runValidators: true });
+};
+
 module.exports = {
     createMovie,
     getMovieById,
     getAllMovies,
     deleteMovieById,
+    updateMovieById,
 };
